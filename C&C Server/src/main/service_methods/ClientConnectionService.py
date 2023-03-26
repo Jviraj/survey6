@@ -16,7 +16,7 @@ class ClientConnectionService(pb2_grpc.ClientConnectionServicer):
         
     def __init__(self):
         self.LOGGER = Utils.getLogger()     
-        
+        self.mulClients = set()
         
     def ClientConnect(self, request, context):
         
@@ -24,8 +24,12 @@ class ClientConnectionService(pb2_grpc.ClientConnectionServicer):
         time = request.request_epoch_time.seconds
         uid,_ = client_db.addClient({'hostname': request.host_name,'registrationEpochTime': time,'lastActiveTime': time,'currentStatus': 1})
 
+        client_name = request.host_name
+        if client_name in self.mulClients:
+            return pb2.ClientConnectResponse(connection_status = 0, uid = uid)
+
         self.LOGGER.info("CLient connected with host name : {}".format(request.host_name))
-        
+        self.mulClients.add(client_name)
         return pb2.ClientConnectResponse(connection_status = 1,uid = uid)
 
     def ClientDisconnect(self, request, context):        
