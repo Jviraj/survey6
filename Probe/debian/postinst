@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# su - survey6 
+
+# sudo -u survey6 cp -r /usr/share/cnc-server/ /home/survey6/
+
+python3 -m pip install -r requirements.txt

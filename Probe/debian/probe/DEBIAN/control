@@ -1,0 +1,8 @@
+Package: probe
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Webtelescope <scorelab.com>
+Installed-Size: 13
+Section: python
+Priority: optional
+Description: Probe of Survey6 tool
