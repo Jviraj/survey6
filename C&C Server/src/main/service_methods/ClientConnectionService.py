@@ -68,7 +68,11 @@ class ClientConnectionService(pb2_grpc.ClientConnectionServicer):
         
         
     def Heartbeat(self, request, context):
-        pass
+        print("Heartbeat request made.")
+        print(request)
+        heartbeat_reply = pb2.HeartbeatAck()
+        heartbeat_reply.ack = 1
+        return heartbeat_reply
 
     def GrantReceiveData(self, request, context):
         pass
